@@ -6,6 +6,9 @@ use Drupal\commerce_payment\PluginForm\PaymentMethodAddForm as BasePaymentMethod
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
+/**
+ * Method add form.
+ */
 class WirePaymentMethodAddForm extends BasePaymentMethodAddForm {
 
   use StringTranslationTrait;

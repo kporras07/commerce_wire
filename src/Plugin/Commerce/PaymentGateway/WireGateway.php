@@ -18,6 +18,9 @@ use Drupal\Core\Form\FormStateInterface;
  *   display_label = "Wire Transfer",
  *   forms = {
  *     "add-payment-method" = "Drupal\commerce_wire\PluginForm\WireGateway\WirePaymentMethodAddForm",
+ *     "refund-payment" = "Drupal\commerce_payment\PluginForm\PaymentRefundForm",
+ *     "void-payment" = "Drupal\commerce_payment\PluginForm\PaymentVoidForm",
+ *     "receive-payment" = "Drupal\commerce_payment\PluginForm\PaymentReceiveForm",
  *   },
  *   modes = {
  *     "n/a" = @Translation("N/A")
