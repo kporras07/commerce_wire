@@ -18,6 +18,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   display_label = "Wire Transfer",
  *   forms = {
  *     "add-payment-method" = "Drupal\commerce_wire\PluginForm\WireGateway\WirePaymentMethodAddForm",
+ *     "view-payment" = "Drupal\commerce_wire\PluginForm\WireGateway\WirePaymentMethodViewForm",
  *     "refund-payment" = "Drupal\commerce_payment\PluginForm\PaymentRefundForm",
  *     "void-payment" = "Drupal\commerce_payment\PluginForm\PaymentVoidForm",
  *     "receive-payment" = "Drupal\commerce_payment\PluginForm\PaymentReceiveForm",
@@ -93,6 +94,12 @@ class WireGateway extends PaymentGatewayBase implements OnsitePaymentGatewayInte
   public function buildPaymentOperations(PaymentInterface $payment) {
     $payment_state = $payment->getState()->value;
     $operations = [];
+    $operations['view'] = [
+      'title' => $this->t('View'),
+      'page_title' => $this->t('View payment'),
+      'plugin_form' => 'view-payment',
+      'access' => TRUE,
+    ];
     $operations['receive'] = [
       'title' => $this->t('Receive'),
       'page_title' => $this->t('Receive payment'),
