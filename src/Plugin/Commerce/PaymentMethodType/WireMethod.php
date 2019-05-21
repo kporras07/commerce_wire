@@ -22,7 +22,8 @@ class WireMethod extends PaymentMethodTypeBase {
    * {@inheritdoc}
    */
   public function buildLabel(PaymentMethodInterface $payment_method) {
-    $uri = $payment_method->commerce_wire_receipt->entity->getFileUri();
+    $file = $payment_method->commerce_wire_receipt->entity;
+    $uri = $file->getFileUri();
     $url = file_create_url($uri);
 
     $url = Url::fromUri($url, $options = [
@@ -31,7 +32,9 @@ class WireMethod extends PaymentMethodTypeBase {
         'target' => ['_blank'],
       ],
     ]);
-    $link = Link::fromTextAndUrl($this->t('View Receipt'), $url);
+    $link = Link::fromTextAndUrl($this->t('Receipt: @name', [
+      '@name' => $file->getFileName(),
+    ]), $url);
 
     return $link->toString();
   }
