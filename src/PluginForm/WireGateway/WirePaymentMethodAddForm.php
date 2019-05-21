@@ -19,8 +19,11 @@ class WirePaymentMethodAddForm extends BasePaymentMethodAddForm {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
-    $form['payment_details'] = $this->buildWireTransferForm($form['payment_details'], $form_state);
+    $form['payment_details']['commerce_wire_receipt'] = $this->buildWireTransferForm($form['payment_details'], $form_state);
     $form['payment_details']['instructions'] = $this->entity->getPaymentGateway()->getPlugin()->buildPaymentInstructions();
+    $form_state->setCached(FALSE);
+    $form_state->disableCache();
+
     return $form;
   }
 
@@ -28,7 +31,7 @@ class WirePaymentMethodAddForm extends BasePaymentMethodAddForm {
    * {@inheritdoc}
    */
   protected function buildWireTransferForm(array $element, FormStateInterface $form_state) {
-    $element['commerce_wire_receipt'] = [
+    $element = [
       '#title' => $this->t('Receipt'),
       '#type' => 'managed_file',
       '#description' => $this->t("Allowed formats: jpg, jpeg, png"),
